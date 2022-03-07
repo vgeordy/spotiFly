@@ -11,13 +11,15 @@ def main(request):
         print(f"User does not have a token, directing to login")
         return HttpResponseRedirect(spotify_login)
     # test if user is properly logged in by trying to get their library
-    disp_data = api.utils.get_user_library(request)
+    disp_data = api.utils.get_user_profile(request)
     if 'error' in disp_data.keys():
         print(f"Error when getting profle: {disp_data}")
         print("Setting token to NONE and redirecting")
         request.session['spotify_token'] = None
         return HttpResponseRedirect(spotify_login)
-    return HttpResponse(f"Hello! You are authed. You are logged in as {disp_data}. Your token is {request.session.get('spotify_token')}")
+    else:
+        request.session['user_id'] = disp_data['id']
+    return HttpResponse(f"Hello! You are authed. You are logged in as {request.session.get('user_id')}.")
 
 def callback(request):
     code = request.GET.get('code', None)

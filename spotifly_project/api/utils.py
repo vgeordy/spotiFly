@@ -17,22 +17,31 @@ def get_user_library(request):
     print(f'response was {response.text}')
     return response.json()
 
-def create_private_playlist(request, playlist_name):
+def get_user_profile(request):
+    token = session_token(request)
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
+    response = requests.get(f'{ENDPOINT}/me', headers=headers)
+    print(f'response was {response.text}')
+    return response.json()
+
+def create_private_playlist(request, name, description, public):
     # create a private playlist
     token = session_token(request)
     headers = {
         'Authorization': f'Bearer {token}'
     }
     data = {
-        'name': playlist_name,
-        'public': False
+        'name': name,
+        'description': description,
+        'public': public
     }
-    response = requests.post(f'{ENDPOINT}/me/playlists'.format(user_id=request.session.get('user_id')), headers=headers, data=data)
+    response = requests.post(f'{ENDPOINT}/me/playlists', headers=headers, data=data)
     return response.json()
 
 def code_to_token(code):
     print(f"Got {code} as code, exchanging for token.")
-    #encoded_clientid = 
     data = {
         'grant_type': 'authorization_code',
         'code': code,
