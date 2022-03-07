@@ -10,8 +10,8 @@ def main(request):
     if not request.session.get('spotify_token'):
         print(f"User does not have a token, directing to login")
         return HttpResponseRedirect(spotify_login)
-    print("Attempting to get user profile")
-    disp_data = api.utils.get_user_profile(request.session.get('spotify_token'))
+    # test if user is properly logged in by trying to get their library
+    disp_data = api.utils.get_user_library(request)
     if 'error' in disp_data.keys():
         print(f"Error when getting profle: {disp_data}")
         print("Setting token to NONE and redirecting")
