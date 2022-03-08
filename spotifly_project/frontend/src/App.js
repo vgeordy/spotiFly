@@ -7,11 +7,11 @@ import Login from "./components/Login";
 const App = () => {
   return (
     <div className='app'>
-      <div>Welcome to Spotifly</div>
+      
       <Routes>
         <Route path='/login' element={<Login />} />
         <Route path='/about-us' element={<About />} />
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Home/>} />
       </Routes>
     </div>
   );
