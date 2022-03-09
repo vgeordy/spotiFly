@@ -1,0 +1,67 @@
+:root {
+  margin: 0;
+  padding: 0;
+  ---black-color: #191414;
+  ---gray-color: #363636;
+  ---sand-color: #969696;
+  ---green-color: #1DB954;
+  ---white-color: #fff;
+  height: 100%;
+  width: 100%;
+  border: none;
+  ---header-font: 'Bebas Neue', cursive;
+  ---body-font: 'Roboto', sans-serif;
+  font-family: var(---body-font);
+
+}
+
+.app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  color: var(---white-color);
+  background: linear-gradient(var(---black-color) 10%, var(---gray-color) );
+}
+
+.home-container {
+  
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: var(---black-color);
+  border-bottom: 4px double var(---green-color);
+  height: 8%;
+}
+
+.header-title {
+  letter-spacing: .2rem;
+}
+
+.header-icon {
+  font-size: 3rem;
+  color: var(---green-color);
+}
+
+.account-button {
+  background-color: var(---green-color);
+}
+
+.animated-spotify-icon {
+  font-size: 8rem;
+  animation: spinning-logo 1.5s ease-in-out infinite alternate;
+}
+@keyframes spinning-logo {
+  from {
+    transform: rotate(-45deg);
+  }
+  to {
+    transform: rotate(405deg);
+  }
+}
