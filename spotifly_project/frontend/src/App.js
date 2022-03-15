@@ -28,25 +28,13 @@ const App = () => {
       MuiDivider: {
         styleOverrides: {
           root: {
-            color: purple[500],
-            backgroundColor: purple[500],
+            color: "#fff",
+            backgroundColor: "#fff",
             borderBottomWidth: "2px",
           }
         }
       },
-      MuiListItem: {
-        styleOverrides: {
-          root: {
-            backgroundColor: '#363636',
-            color: "#fff",
-            '&:hover': {
-              backgroundColor: "#191414"
-            }
-          },
-          
-          
-        }
-      }
+
     }
   })
   return (
