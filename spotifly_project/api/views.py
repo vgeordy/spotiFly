@@ -23,7 +23,7 @@ class UserTokenView(APIView):
 class TrackFeaturesView(APIView):
     # returns acousticness, danceability, key, etc. all the stuff we want.
     # directly returns spotify json, does not alter the format. see https://developer.spotify.com/documentation/web-api/reference/#/operations/get-several-audio-features
-    # USAGE: /api/track_features?ids=trackid,trackid,trackid,etc
+    # USAGE: /api/track-features?ids=trackid,trackid,trackid,etc
     def get(self, request):
         token = request.session.get('spotify_token') or request.GET.get('token', None)
         if not token:
