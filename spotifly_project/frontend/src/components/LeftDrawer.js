@@ -17,107 +17,58 @@ import { Collapse } from '@mui/material';
 
 
 
-const drawerWidth = "12.5%"
 
-export default function LeftDrawer() {
-  const [open, setOpen] = useState({"mood": false, "properties": false, "context": false})
 
-const handleClick = (e) => {
-  e.preventDefault();
-setOpen({ ...open, [e.target.id] : !open[e.target.id] });
-}
+export default function LeftDrawer({filter, setFilter}) {
+  const [open, setOpen] = useState('')
+  const drawerWidth = "12.5%"
+  const options = {
+    "One": ["One-One", "One-Two", "One-Three"],
+    "Two": ["Two-One", "Two-Two"],
+    "Three": ["Three-One"]
+  }
+
+  const handleClick = (newOpen) => {
+    //e.preventDefault()
+    if (open === newOpen) setOpen('')
+    else setOpen(newOpen)
+  }
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          backgroundColor: '#191414',
-          '& .MuiDrawer-paper': {
-            marginTop: "4.5%",
-            height: "100%",
-            backgroundColor: '#363636',
-            width: drawerWidth,
-            boxSizing: 'border-box',
-            borderRight: "2px solid #1DB954",
-            
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Typography sx={{ marginTop: "2rem" }} align='center' variant='h4' noWrap component="div">Filters</Typography>
-        <Divider />
+    <Box sx={{ display: 'flex', backgroundColor: "red" }}>
+      <CssBaseline />
+      
+      <Drawer sx={{
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+          width: 200,
+          top: "6rem",
+          boxSizing: 'border-box',
+          backgroundColor: "transparent",
+        },
+        
+      }} variant="permanent" anchor='left' >
+        <Typography align='center' variant="h4">Filters</Typography>
         <List>
-          <ListItemButton id="mood" onClick={e => {handleClick(e)}}>
-            <ListItemText primaryTypographyProps={{fontSize: "1.5rem"}} inset primary="Mood" />
-              {open['mood'] ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={open['mood']} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Danceablility" />
+          {Object.keys(options).map(key => (
+              <List>
+              <ListItemButton dense divider={true} onClick={() => handleClick( key )} key={key}>
+                <ListItemText primaryTypographyProps={{sx: {fontSize: 24}}} inset primary={key} />
+                {open === key ? <ExpandLess /> : <ExpandMore />}
               </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Valence" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Tempo" />
-              </ListItemButton>
+              <Collapse in={open === key} timeout="auto" unmountOnExit>
+                <List component="div">
+                  {options[key].map((item, index) => (
+                    <ListItemButton onClick={() => setFilter(item) }sx={{borderTop: "1px dotted white"}}key={item}>
+                      <ListItemText primary={item} />
+                    </ListItemButton>
+                  ))}
+                </List>
+              </Collapse>
+              <Divider />
             </List>
-          </Collapse>
-           <ListItemButton id="properties" onClick={e => {handleClick(e)}}>
-            <ListItemText primaryTypographyProps={{fontSize: "1.5rem"}} inset primary="Properties" />
-              {open['properties'] ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={open['properties']} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Loudness" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Speechiness" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Instrumentalness" />
-              </ListItemButton>
-            </List>
-          </Collapse>
-          <ListItemButton id="context" onClick={e => {handleClick(e)}}>
-            <ListItemText primaryTypographyProps={{fontSize: "1.5rem"}} inset primary="Context" />
-              {open['context'] ? <ExpandLess /> : <ExpandMore />}
-          </ListItemButton>
-          <Collapse in={open['context']} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Liveness" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Acousticness" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Segments" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Tatums" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Bars" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Beats" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Pitches" />
-              </ListItemButton>
-              <ListItemButton sx={{ pl: 4 }}>
-                <ListItemText primary="Timbre" />
-              </ListItemButton>
-            </List>
-          </Collapse>
-          
-        </List>
-        <Divider />
+          ))
+        }
+      </List>
       </Drawer>
     </Box>
   )
