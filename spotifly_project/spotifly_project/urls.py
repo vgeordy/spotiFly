@@ -20,9 +20,5 @@ urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', include('frontend.urls')),
     path('auth', include('auth.urls')),
-<<<<<<< HEAD
-    
-=======
     path('api', include('api.urls'))
->>>>>>> caa99f631657dfa821ffe2f94ec40102de9b8cb4
 ]
