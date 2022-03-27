@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import About from "./components/About";
-
 import Home from "./components/Home";
 import Login from "./components/Login";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
+
+import LandingPage from './components/LandingPage';
 const App = () => {
   const theme = createTheme({
     palette: {
@@ -39,14 +40,16 @@ const App = () => {
   })
   return (
     <div className='app'>
+
       <ThemeProvider theme={theme}>
-      <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/about-us' element={<About />} />
-        <Route path='/' element={<Home/>} />
-      </Routes>
+        <Routes>
+          <Route path='/login' element={<LandingPage />} />
+          <Route path='/logintemp' element={<Login />} />
+          <Route path='/about-us' element={<About />} />
+          <Route path='/' element={<Home />} />
+        </Routes>
       </ThemeProvider>
-      </div>
+    </div>
   );
 };
 

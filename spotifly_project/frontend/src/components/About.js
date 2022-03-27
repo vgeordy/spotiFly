@@ -12,7 +12,7 @@ const About = () => {
       </ScrollPage>
 
       <ScrollPage page={1}>
-        <Animator animation={batch(Sticky(), ZoomIn(), Move(0, -200))}>
+        <Animator animation={batch(Sticky(), ZoomIn(), Move(0, -200), FadeOut())}>
           <h1 style={{ color: 'blue' }}>What?</h1>
         </Animator>
 
